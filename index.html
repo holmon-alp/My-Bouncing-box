@@ -1,0 +1,77 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+                    box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        #my_section {
+            background-color: black;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        #my_bouncing_box {
+            background-color: blue;
+            border-radius: 3px;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            min-width: 100px;
+            min-height: 100px;
+            text-align: center;
+            font-weight: bold;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <section id="my_section">
+        <div id="my_bouncing_box">oblaqulo_l</div>
+    </section>
+    <script type="text/javascript">
+        const section = document.querySelector("#my_section");
+        const my_bouncing_box = document.querySelector("#my_bouncing_box");
+        const FPS = 60;
+        section.style.height = window.innerHeight + "px";
+        section.style.width = window.innerWidth + "px";
+
+        let xPosition = 10;
+        let yPosition = 10;
+        let xSpeed = 4;
+        let ySpeed = 4;
+
+        function update() {
+            my_bouncing_box.style.left = xPosition + "px";
+            my_bouncing_box.style.top = yPosition + "px";
+        }
+
+        setInterval(() => {
+            if (xPosition + my_bouncing_box.clientWidth >= window.innerWidth || xPosition <= 0) {
+                xSpeed = -xSpeed;
+            }
+            if (yPosition + my_bouncing_box.clientHeight >= window.innerHeight || yPosition <= 0) {
+                ySpeed = -ySpeed;
+            }
+
+            xPosition += xSpeed;
+            yPosition += ySpeed;
+            update();
+        }, 1500 / FPS);
+
+        window.addEventListener("resize", () => {
+            xPosition = 10;
+            yPosition = 10;
+        });
+    </script>
+</body>
+</html>
